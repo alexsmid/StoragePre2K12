@@ -1,6 +1,6 @@
 function ConvertFrom-SizeString {
     param(
-        [parameter(Mandatory, ValueFromPipeline)]
+        [parameter(Mandatory = $true, ValueFromPipeline = $true)]
         [string]
         $String
     )

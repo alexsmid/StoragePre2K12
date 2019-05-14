@@ -77,9 +77,9 @@ function Get-DiskPartDisk {
 
                         # if DiskID is a guid then partitionstyle is GPT
                         # otherwises its RAW, MBR or something else
-                        if ([guid]::TryParse($DiskID, ([ref]$DiskID))) {
-                            $Disk.PartitionStyle = "GPT"
-                        } else {
+                        try {
+                            [guid]::Parse($DiskID) | Out-Null ; $Disk.PartitionStyle = "GPT"
+                        } catch {
                             if ($DiskID -eq "00000000") {
                                 $Disk.PartitionStyle = "RAW"
                             } elseif ($DiskID -match "^[\d\w]{8}$") {
